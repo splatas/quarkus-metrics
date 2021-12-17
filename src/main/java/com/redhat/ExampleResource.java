@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-//import io.micrometer.core.annotation.Timed;
+import io.micrometer.core.annotation.Counted;
+import io.micrometer.core.annotation.Timed;
 
 @Path("/q-metrics")
 public class ExampleResource {
@@ -28,6 +28,8 @@ public class ExampleResource {
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     @Path("/getSongs")
+    @Timed("time_get_songs")
+    @Counted
     public List<String> getSongs() {
     	System.out.println(" => getSongs: songs=" + songs);
     	
@@ -37,7 +39,8 @@ public class ExampleResource {
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     @Path("/populateSongs")
-    //@Timed("populate_songs")
+    @Timed("time_populate_songs")
+    @Counted
     public List<String> populateSongs() {
     	System.out.println(" => populateSongs.init: songs=" + songs);
     	
